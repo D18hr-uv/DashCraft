@@ -1,0 +1,109 @@
+/* General styling */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff;
+    color: #333;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.dark-mode {
+    background-color: #1e1e1e;
+    color: #f0e6e6;
+}
+
+/* Header section */
+header {
+    background-color: #f7d6c3; /* Peach */
+    color: #000; /* Black */
+    padding: 20px 0;
+    text-align: center;
+    margin-bottom: 20px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.dark-mode header {
+    background-color: #333; /* Darker shade */
+    color: #f0e6e6;
+}
+
+/* Content sections */
+main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.upload-section, .features-section, .instructions-section {
+    background: #ffffff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.dark-mode .upload-section, .dark-mode .features-section, .dark-mode .instructions-section {
+    background: #292929;
+    color: #f0e6e6;
+}
+
+/* Buttons */
+button {
+    padding: 10px 15px;
+    background-color: #000; /* Black */
+    color: #f7d6c3; /* Peach */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+button:hover {
+    background-color: #333;
+}
+
+.dark-mode button {
+    background-color: #f7d6c3;
+    color: #000;
+}
+
+/* Footer */
+footer {
+    background: #000; /* Black */
+    color: #f7d6c3; /* Peach */
+    text-align: center;
+    padding: 10px 0;
+    margin-top: 20px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.dark-mode footer {
+    background: #292929;
+    color: #f0e6e6;
+}
+
+/* Theme toggle */
+.theme-toggle {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px 20px;
+    background-color: #f7d6c3; /* Peach */
+    transition: background-color 0.3s;
+}
+
+.dark-mode .theme-toggle {
+    background-color: #333; /* Darker shade */
+    color: #f0e6e6;
+}
+
+.theme-toggle label {
+    font-size: 1em;
+    margin-right: 10px;
+}
+
+.theme-toggle input {
+    cursor: pointer;
+}

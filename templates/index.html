@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DashCraft</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="theme-toggle">
+        <label for="theme-switch">Dark Mode:</label>
+        <input type="checkbox" id="theme-switch">
+    </div>
+    <header>
+        <div class="header-content">
+            <h1>Welcome to the <b>DashCraft</b> Crafting dashboards effortlessly</h1>
+            <p>Upload your dataset and explore dynamic visualizations with ease.</p>
+        </div>
+    </header>
+
+    <main>
+        <section class="upload-section">
+            <h2>Upload Your Dataset</h2>
+            <p>Accepted format: <strong>CSV</strong>. Ensure your file contains numeric or categorical data for visualization.</p>
+            <form action="/" method="POST" enctype="multipart/form-data">
+                <input type="file" name="file" accept=".csv" required>
+                <button type="submit">Upload and Explore</button>
+            </form>
+        </section>
+
+        <section class="features-section">
+            <h2>Features of the Dashboard</h2>
+            <ul>
+                <li>Dynamic visualization options: Line chart, scatter plot, and pie chart.</li>
+                <li>Support for custom X and Y axis selection.</li>
+                <li>Real-time rendering of uploaded data.</li>
+                <li>User-friendly interface for effortless exploration.</li>
+            </ul>
+        </section>
+
+        <section class="instructions-section">
+            <h2>How to Use the Dashboard</h2>
+            <ol>
+                <li>Upload a CSV file containing your data.</li>
+                <li>Navigate to the dashboard to select attributes for visualization.</li>
+                <li>Choose your desired plot type: line chart, scatter plot, or pie chart.</li>
+                <li>Analyze and interpret the generated visualizations.</li>
+            </ol>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Interactive Data Dashboard. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Toggle light and dark mode
+        const themeSwitch = document.getElementById('theme-switch');
+        themeSwitch.addEventListener('change', () => {
+            document.body.classList.toggle('dark-mode', themeSwitch.checked);
+        });
+    </script>
+</body>
+</html>
