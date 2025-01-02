@@ -3,6 +3,7 @@ import pandas as pd
 import dash
 from dash import dcc, html
 from dash.dependencies import Input, Output
+from asgiref.wsgi import WsgiToAsgi
 
 # Flask app
 flask_app = Flask(__name__)
@@ -102,3 +103,6 @@ def update_graph(x_column, y_columns, plot_type):
 # Run the app
 if __name__ == '__main__':
     flask_app.run(debug=False, host='0.0.0.0')
+
+# ASGI Adapter
+asgi_app = WsgiToAsgi(flask_app)
