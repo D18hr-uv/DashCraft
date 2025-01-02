@@ -101,4 +101,4 @@ def update_graph(x_column, y_columns, plot_type):
 
 # Run the app
 if __name__ == '__main__':
-    flask_app.run(debug=True)
+    flask_app.run(debug=False, host='0.0.0.0')
