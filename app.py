@@ -6,16 +6,16 @@ from dash.dependencies import Input, Output
 # from asgiref.wsgi import WsgiToAsgi
 
 # Flask app
-flask_app = Flask(__name__)
+app = Flask(__name__)
 
 # Dash app
-dash_app = dash.Dash(__name__, server=flask_app, url_base_pathname='/dashboard/')
+dash_app = dash.Dash(__name__, server=app, url_base_pathname='/dashboard/')
 
 # Placeholder for uploaded data
 global_data = pd.DataFrame()
 
 # Flask route for homepage
-@flask_app.route('/', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
         file = request.files['file']
@@ -102,8 +102,8 @@ def update_graph(x_column, y_columns, plot_type):
 
 # Run the app
 # if __name__ == '__main__':
-    flask_app.run(host='0.0.0.0')
-    # flask_app.run(debug= True)
+    app.run(host='0.0.0.0')
+    # app.run(debug= True)
 
 # # ASGI Adapter
-# asgi_app = WsgiToAsgi(flask_app)
+# asgi_app = WsgiToAsgi(app)
