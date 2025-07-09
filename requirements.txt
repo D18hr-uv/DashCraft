@@ -2,3 +2,6 @@ Flask==2.3.3
 Gunicorn
 pandas
 dash
+Flask-SQLAlchemy
+Flask-Login
+Flask-Bcrypt

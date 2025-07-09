@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}DashCraft{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="theme-toggle">
+        <label for="theme-switch">Dark Mode:</label>
+        <input type="checkbox" id="theme-switch">
+    </div>
+    <nav>
+        <div class="nav-container">
+            <a href="{{ url_for('index') }}" class="brand">DashCraft</a>
+            <div class="nav-links">
+                {% if current_user.is_authenticated %}
+                    <span>Hi, {{ current_user.username }}!</span>
+                    <a href="{{ url_for('logout') }}">Logout</a>
+                    <a href="{{ url_for('dash_app.index') }}">Dashboard</a>
+                {% else %}
+                    <a href="{{ url_for('login') }}">Login</a>
+                    <a href="{{ url_for('register') }}">Register</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flashes">
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Interactive Data Dashboard. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Toggle light and dark mode
+        const themeSwitch = document.getElementById('theme-switch');
+        if (themeSwitch) {
+            themeSwitch.addEventListener('change', () => {
+                document.body.classList.toggle('dark-mode', themeSwitch.checked);
+                // Optionally, save preference to localStorage
+                if (themeSwitch.checked) {
+                    localStorage.setItem('theme', 'dark-mode');
+                } else {
+                    localStorage.removeItem('theme');
+                }
+            });
+            // Apply saved theme on load
+            if (localStorage.getItem('theme') === 'dark-mode') {
+                document.body.classList.add('dark-mode');
+                themeSwitch.checked = true;
+            }
+        }
+    </script>
+</body>
+</html>

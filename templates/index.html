@@ -1,64 +1,58 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DashCraft</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
-    <div class="theme-toggle">
-        <label for="theme-switch">Dark Mode:</label>
-        <input type="checkbox" id="theme-switch">
-    </div>
+{% extends "base.html" %}
+
+{% block title %}DashCraft - Home{% endblock %}
+
+{% block content %}
     <header>
         <div class="header-content">
-            <h1>Welcome to the <b>DashCraft</b> Crafting dashboards effortlessly</h1>
-            <p>Upload your dataset and explore dynamic visualizations with ease.</p>
+            <h1>Welcome to <b>DashCraft</b></h1>
+            <p>Crafting dashboards effortlessly. Upload your dataset and explore dynamic visualizations with ease.</p>
         </div>
     </header>
 
-    <main>
+    {% if current_user.is_authenticated %}
         <section class="upload-section">
             <h2>Upload Your Dataset</h2>
+            {% if user_file %}
+            <p class="info-message">
+                You have a previously uploaded file: <strong>{{ user_file.filename }}</strong>.
+                <a href="{{ url_for('dash_app.index') }}">Go to Dashboard</a> or upload a new file below to replace it.
+            </p>
+            {% else %}
+            <p>You haven't uploaded any data yet. Upload your first CSV to get started!</p>
+            {% endif %}
             <p>Accepted format: <strong>CSV</strong>. Ensure your file contains numeric or categorical data for visualization.</p>
-            <form action="/" method="POST" enctype="multipart/form-data">
+            <form action="{{ url_for('index') }}" method="POST" enctype="multipart/form-data">
                 <input type="file" name="file" accept=".csv" required>
                 <button type="submit">Upload and Explore</button>
             </form>
         </section>
-
-        <section class="features-section">
-            <h2>Features of the Dashboard</h2>
-            <ul>
-                <li>Dynamic visualization options: Line chart, scatter plot, and pie chart.</li>
-                <li>Support for custom X and Y axis selection.</li>
-                <li>Real-time rendering of uploaded data.</li>
-                <li>User-friendly interface for effortless exploration.</li>
-            </ul>
+    {% else %}
+        <section class="info-section">
+            <p>Please <a href="{{ url_for('login') }}">login</a> or <a href="{{ url_for('register') }}">register</a> to upload files and use the dashboard.</p>
         </section>
+    {% endif %}
 
-        <section class="instructions-section">
-            <h2>How to Use the Dashboard</h2>
-            <ol>
-                <li>Upload a CSV file containing your data.</li>
-                <li>Navigate to the dashboard to select attributes for visualization.</li>
-                <li>Choose your desired plot type: line chart, scatter plot, or pie chart.</li>
-                <li>Analyze and interpret the generated visualizations.</li>
-            </ol>
-        </section>
-    </main>
+    <section class="features-section">
+        <h2>Features of the Dashboard</h2>
+        <ul>
+            <li>Dynamic visualization options: Line chart, scatter plot, and pie chart.</li>
+            <li>Support for custom X and Y axis selection.</li>
+            <li>Real-time rendering of uploaded data for authenticated users.</li>
+            <li>User-friendly interface for effortless exploration.</li>
+            <li>Personalized experience: Your data is saved to your account.</li>
+        </ul>
+    </section>
 
-    <footer>
-        <p>&copy; 2025 Interactive Data Dashboard. All rights reserved.</p>
-    </footer>
-
-    <script>
-        // Toggle light and dark mode
-        const themeSwitch = document.getElementById('theme-switch');
-        themeSwitch.addEventListener('change', () => {
-            document.body.classList.toggle('dark-mode', themeSwitch.checked);
-        });
-    </script>
-</body>
-</html>
+    <section class="instructions-section">
+        <h2>How to Use the Dashboard</h2>
+        <ol>
+            <li><a href="{{ url_for('register') }}">Register</a> for an account or <a href="{{ url_for('login') }}">Login</a> if you already have one.</li>
+            <li>Upload a CSV file containing your data using the form on this page.</li>
+            <li>Navigate to the dashboard (a link will appear, or use the navigation bar).</li>
+            <li>Select attributes for visualization from your data.</li>
+            <li>Choose your desired plot type: line chart, scatter plot, or pie chart.</li>
+            <li>Analyze and interpret the generated visualizations.</li>
+        </ol>
+    </section>
+{% endblock %}
